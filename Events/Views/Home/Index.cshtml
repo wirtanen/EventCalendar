@@ -1,0 +1,71 @@
+﻿@{
+    ViewData["Title"] = "2024 Calendar";
+}
+
+@model CalendarViewModel;
+
+@section PageHeader {
+<span>2024 Calendar</span>
+}
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">Sunday</th>            
+            <th scope="col">Monday</th>
+            <th scope="col">Tuesday</th>
+            <th scope="col">Wednesday</th>
+            <th scope="col">Thursday</th>
+            <th scope="col">Friday</th>
+            <th scope="col">Saturday</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 1; i <= DateTime.DaysInMonth(Model.ThisMonth.Year, Model.ThisMonth.Month); i++)
+        {
+            DateTime date = new DateTime(Model.ThisMonth.Year, Model.ThisMonth.Month, i);
+
+            <!--Might be easier to get a list of sundays and see if first item on the list is day 1
+                if not create special shortened loop from 1 -> saturday to print <tr> pair
+                if so loop through each week item and loop through each day of the week
+
+                While in each of these loops -> check date and see if hasEvent. color code td item
+            -->
+            
+
+            @if (i == 1 && date.DayOfWeek != DayOfWeek.Sunday)
+            {
+                <tr>
+                    <!--Fill the non-date spaces with grey-->
+                    <!--for 0 to date.DayOfWeek-->
+                    <!--need to loop through first week until saturday -> then force i to that dates number to continue above for loop appropriately-->
+                </tr>
+            }
+            else
+            {
+                Boolean hasEvent = Model.EventsThisMonth.Any(x => x.StartDate.Day == i || x.EndDate.Day == i || (x.StartDate.Day < i && x.EndDate.Day > i));
+
+                @if (hasEvent)
+                { }
+                else
+                { }
+            }
+        }
+    </tbody>
+</table>
+
+<script type="text/javascript">
+    var homeViewObj = homeViewObj || (function () {
+        //variables
+
+        //get event details
+        async function getThisDatesEventDetails() 
+        {
+        
+        }
+
+        //change month
+        //reload month view
+
+    })();
+</script>
